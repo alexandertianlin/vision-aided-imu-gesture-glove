@@ -281,5 +281,9 @@ commands: `FINGER_OPEN`, `FINGER_FIST`, `TRIGGER_OPEN`, `TRIGGER_FIST`, `IDLE`
 
 ---
 
+| V2.2 | D435i + MediaPipe 连续关节角度驱动 (端口5058) | 2026-06-22 | in_progress |
+
+---
+
 *最后更新: 2026-06-22*
 *版本: v2.2*

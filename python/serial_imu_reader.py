@@ -7,8 +7,8 @@ Protocol: 0xB5 0xA5 0x55 header, 35-byte packets
   - Baud: 460800
 
 Adapted from:
-  C:\Users\tianl\Documents\Codex\sensors\orbbec\work\serial_imu_reader.py
-  C:\Users\tianl\Documents\Codex\sensors\orbbec\work\orbbec_viewer_imu.py
+  C:\\Users\\tianl\\Documents/Codex/sensors/orbbec/work/serial_imu_reader.py
+  C:\\Users\\tianl\\Documents/Codex/sensors/orbbec/work/orbbec_viewer_imu.py
 """
 
 import serial
