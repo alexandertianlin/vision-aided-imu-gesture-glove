@@ -102,10 +102,9 @@ public class MediaPipeAngleReceiver : MonoBehaviour
                 }
                 else
                 {
-                    // Fusion mode: IMU + vision blending
-                    float blend = 1f - Mathf.Exp(-moveSpeed * Time.deltaTime);
-                    fingers[fi].MoveVisionAngleAnchorAndSyncImu(
-                        pitch, yaw, blend,
+                    // ForceVisionAngleAnchor needs no IMU quaternion
+                    fingers[fi].ForceVisionAngleAnchor(
+                        pitch, yaw,
                         handMotion.fingerBendAxis,
                         handMotion.fingerSpreadAxis
                     );
