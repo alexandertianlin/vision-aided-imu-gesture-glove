@@ -250,6 +250,24 @@ def merge_calibration_samples(database, calibration_samples):
 
 
 def database_ready(database, finger_name):
+    """Check if a finger has minimum calibration samples."""
+    item = database.get(finger_name, {})
+    return (
+        len(item.get("fist", [])) >= MIN_DATABASE_SAMPLES
+        and len(item.get("open", [])) >= MIN_DATABASE_SAMPLES
+    )
+
+
+def database_full(database, finger_name):
+    """Check if a finger has the maximum number of calibration samples."""
+    item = database.get(finger_name, {})
+    return (
+        len(item.get("fist", [])) >= DATABASE_LIMIT
+        and len(item.get("open", [])) >= DATABASE_LIMIT
+    )
+
+
+def new_ranges():
     item = database.get(finger_name, {})
     return (
         len(item.get("fist", [])) >= MIN_DATABASE_SAMPLES
@@ -401,23 +419,22 @@ def main():
     calibration_db = load_calibration_db()
     calibration_started = time.monotonic()
     total_calibration_seconds = STAGE_SECONDS * len(FINGER_ORDER)
-    # Auto-skip calibration if database has enough samples for all fingers
-    all_ready = True
-    for n in FINGER_ORDER:
-        if not database_ready(calibration_db, n):
-            all_ready = False
-            break
-    if all_ready and "--recal" not in sys.argv:
+    # Skip calibration when database is full
+    is_full = all(database_full(calibration_db, n) for n in FINGER_ORDER)
+    is_ready = all(database_ready(calibration_db, n) for n in FINGER_ORDER)
+    if is_full:
         calibrated = True
-        info = "AUTO: Loaded " + str(DATABASE_LIMIT) + " samples/finger. Use --recal to recalibrate."
-        print(info)
+        print("DONE: Calibration full (" + str(DATABASE_LIMIT) + " samples). Not collecting.")
+    elif "--recal" in sys.argv:
+        calibrated = False
+        print("RECAL: Forcing recalibration.")
+    elif is_ready:
+        calibrated = True
+        print("SKIP: Using existing calibration data. Add --recal to recollect.")
     else:
         calibrated = False
-        if "--recal" in sys.argv:
-            print("RECAL: Forcing recalibration.")
-        else:
-            need = str(MIN_DATABASE_SAMPLES)
-            print("CALIBRATE: Need " + need + "+ samples/finger. Follow on-screen prompts.")
+        need = str(MIN_DATABASE_SAMPLES)
+        print("CAL: Need " + need + "+ samples per finger. Follow prompts.")
 
     
     # --skip-cal flag: use existing calibration database if available
