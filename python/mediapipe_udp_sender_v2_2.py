@@ -268,12 +268,10 @@ def database_full(database, finger_name):
 
 
 def new_ranges():
-    item = database.get(finger_name, {})
-    return (
-        len(item.get("fist", [])) >= MIN_DATABASE_SAMPLES
-        and len(item.get("open", [])) >= MIN_DATABASE_SAMPLES
-    )
-
+    return {
+        name: {"min": 999.0, "max": -999.0}
+        for name in FINGER_ORDER
+    }
 
 def update_range(ranges, finger_name, value):
     ranges[finger_name]["min"] = min(ranges[finger_name]["min"], value)
