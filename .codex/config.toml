@@ -1,0 +1,29 @@
+ # Codex project configuration for glove_hand_tracking
+ [project]
+ name = "Glove Hand Tracking"
+ version = "0.1.0"
+
+ [hooks]
+ # Run before any tool execution
+ pre_command = "backup_check"
+
+ # Rules applied to all tool calls
+ [rules]
+ # Never delete experiment data
+ no_delete_data = true
+ # Always log benchmark results
+ auto_log_benchmark = true
+ # Backup before file modification
+ backup_before_edit = true
+ # Keep git history clean
+ commit_prefix = "[glove]"
+
+ [logging]
+ level = "info"
+ log_dir = "results/logs"
+ save_periodically = true
+
+ [reporting]
+ auto_summary = true
+ default_format = "csv"
+ output_dir = "results/"

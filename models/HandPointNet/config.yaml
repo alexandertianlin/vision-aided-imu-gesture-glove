@@ -1,0 +1,11 @@
+model:
+  name: "HandPointNet"
+  type: "pointcloud"
+  framework: "handpointnet"
+  expected_input: "point_cloud"
+  risk: "high"
+  risk_reason: "Python 2 / PyTorch 0.3 / CUDA 8"
+benchmark:
+  test_sequence: "data/rgb_depth_sequences/"
+  output_dir: "results/"
+  log_dir: "results/logs/"

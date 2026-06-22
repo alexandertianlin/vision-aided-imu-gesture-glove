@@ -1,0 +1,37 @@
+ # Calibration Parameters
+
+ intrinsic_file: "results/calibration/intrinsics_left.yaml"
+ intrinsic_file_right: "results/calibration/intrinsics_right.yaml"
+
+ stereo_calibration:
+   image_dir: "data/calibration_images/stereo/"
+   output_file: "results/calibration/stereo_extrinsics.yaml"
+   flags:
+     use_intrinsic_guess: true
+     fix_intrinsic: false
+     fix_principal_point: false
+     fix_focal_length: false
+     fix_aspect_ratio: false
+     zero_tangent_dist: false
+
+ depth_rgb_registration:
+   enable: true
+   output_file: "results/calibration/depth_to_rgb.yaml"
+
+ # 物理意义
+ # 内参（已获）：相机自己长什么样
+ #   K = [fx  0  cx]
+ #       [ 0 fy  cy]
+ #       [ 0  0   1]
+ #
+ # 外参（待求）：两个相机之间的位置关系
+ #   R — 旋转矩阵
+ #   T — 平移向量
+ #
+ # 单相朢 3D 还原（Depth 已知）：
+ #   X = (u - cx) * Z / fx
+ #   Y = (v - cy) * Z / fy
+ #   Z = depth_value (from sensor)
+ #
+ # 双相机 3D 还原（三角测量）：
+ #   (u1, v1) + (u2, v2) + R, T -> (X, Y, Z)

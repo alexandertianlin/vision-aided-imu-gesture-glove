@@ -1,0 +1,29 @@
+# RTMPose-Hand Benchmark Config
+model:
+  name: "RTMPose-Hand"
+  type: "rgb"
+  framework: "mmpose"
+  repo: "https://github.com/open-mmlab/mmpose"
+  config: "rtmpose-m_8xb32-210e_coco-wholebody-hand-256x256"
+  checkpoint: "rtmpose-m_simcc-coco-wholebody-hand_pt-aic-coco_270e-256x256-5f7378b4_20240522.pth"
+  expected_input: "rgb_image"  # 3-channel RGB
+  input_size: [256, 256]       # H, W
+
+benchmark:
+  test_sequence: "data/rgb_depth_sequences/"
+  output_dir: "results/"
+  log_dir: "results/logs/"
+  warmup_frames: 10
+  benchmark_frames: 200
+
+metrics:
+  detect_rate: true
+  fps: true
+  latency_ms: true
+  stability: true
+  keypoints_21: true   # RTMPose outputs 21 keypoints
+  keypoints_3d: false  # RTMPose outputs 2D keypoints
+
+paths:
+  config_file: "models/rtmpose-m_8xb32-210e_coco-wholebody-hand-256x256.py"
+  checkpoint: "models/rtmpose-m_simcc-coco-wholebody-hand_pt-aic-coco_270e-256x256-5f7378b4_20240522.pth"

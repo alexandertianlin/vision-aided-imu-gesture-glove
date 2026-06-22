@@ -1,0 +1,88 @@
+ # Benchmark Configuration
+
+ benchmark:
+   test_sequence: "data/rgb_depth_sequences/test_dataset"
+   output_dir: "results/"
+   log_dir: "results/logs/"
+
+   gpu_scheduling:
+     strategy: "dynamic"
+     # 第一批
+     gpu_0:
+       model: "RTMPose-Hand"
+       priority: 1
+       run: true
+     gpu_1:
+       model: "AWR-Net"
+       priority: 1
+       run: true
+     gpu_2:
+       model: "HandPointNet"
+       priority: 1
+       run: true
+
+    # 动态 分配（空闲 GPU 依次部署）
+     fallback_order:
+       - "YOLO-Hand-Pose"
+       - "IPNet"
+       - "MMPose-Hand"
+
+   models:
+     AWR-Net:
+       type: "depth"
+       repo: ""
+       protocol: ""
+       timeout_minutes: 30
+       expected_input: "depth_map"
+     HandPointNet:
+       type: "pointcloud"
+       repo: ""
+       protocol: ""
+       timeout_minutes: 30
+       expected_input: "point_cloud"
+       risk: "high"
+       risk_reason: "Python 2 / PyTorch 0.3 / CUDA 8"
+     IPNet:
+       type: "depth"
+       repo: ""
+       protocol: ""
+       timeout_minutes: 30
+       expected_input: "depth_map"
+     RTMPose-Hand:
+       type: "rgb"
+       repo: "mmpose"
+       protocol: "mmpose"
+       timeout_minutes: 20
+       expected_input: "rgb_image"
+     YOLO-Hand-Pose:
+       type: "rgb"
+       repo: "ultralytics"
+       protocol: "yolo"
+       timeout_minutes: 20
+       expected_input: "rgb_image"
+     MMPose-Hand:
+       type: "rgb"
+       repo: "mmpose"
+       protocol: "mmpose"
+       timeout_minutes: 20
+       expected_input: "rgb_image"
+
+   metrics:
+     - "detect_rate"
+     - "fps"
+     - "latency_ms"
+     - "stability_1_5"
+     - "keypoints_21"
+     - "keypoints_3d"
+     - "deployment_time_minutes"
+     - "status"
+     - "failure_reason"
+
+   elimination:
+     enabled: true
+     deployment_timeout_minutes: 30
+
+   output:
+     csv: "benchmark_results.csv"
+     summary_md: "model_comparison.md"
+     plots: true

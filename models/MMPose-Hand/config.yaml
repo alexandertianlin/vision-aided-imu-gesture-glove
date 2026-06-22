@@ -1,0 +1,10 @@
+model:
+  name: "MMPose-Hand"
+  type: "rgb"
+  framework: "mmpose"
+  expected_input: "rgb_image"
+  input_size: [256, 256]
+benchmark:
+  test_sequence: "data/rgb_depth_sequences/"
+  output_dir: "results/"
+  log_dir: "results/logs/"

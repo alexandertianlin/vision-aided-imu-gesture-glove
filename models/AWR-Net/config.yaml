@@ -1,0 +1,26 @@
+# AWR-Net Benchmark Config
+model:
+  name: "AWR-Net"
+  type: "depth"
+  repo: "https://github.com/zhangboshen/AWR-Net"
+  expected_input: "depth_map"  # Single-channel depth image
+  input_size: [256, 256]  # H, W
+
+benchmark:
+  test_sequence: "data/rgb_depth_sequences/"
+  output_dir: "results/"
+  log_dir: "results/logs/"
+  warmup_frames: 10
+  benchmark_frames: 200
+
+metrics:
+  detect_rate: true
+  fps: true
+  latency_ms: true
+  stability: true
+  keypoints_21: true   # AWR-Net outputs 21 keypoints
+  keypoints_3d: true   # AWR-Net outputs 3D coordinates
+
+paths:
+  pretrained_weights: "models/AWR-Net/pretrained/awrnet_hand.pth"
+  config_file: "models/AWR-Net/config/hand.yaml"

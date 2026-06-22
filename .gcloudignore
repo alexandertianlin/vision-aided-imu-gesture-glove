@@ -1,0 +1,11 @@
+.git/
+.gitignore
+__pycache__/
+*.pyc
+venv/
+.venv/
+.vscode/
+node_modules/
+data/**/*.png
+data/**/*.jpg
+results/logs/

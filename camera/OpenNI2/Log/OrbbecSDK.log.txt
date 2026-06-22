@@ -1,0 +1,38 @@
+[06/15 17:40:15.792250][debug][15368][Context.cpp:30] Context creating, work_dir=C:\Users\tianl\Documents\internship record\视觉传感器\奥比中光Astra Pro\上位机软件\OpenNI2\Drivers
+[06/15 17:40:15.792343][debug][15368][Context.cpp:49] Config file version=1.1
+[06/15 17:40:15.792385][debug][15368][FrameBufferManager.cpp:23] Max global frame buffer size updated! size=2048.000MB
+[06/15 17:40:15.792428][info][15368][Context.cpp:68] Context created with config: default config!
+[06/15 17:40:15.792494][info][15368][Context.cpp:73] Work directory=C:\Users\tianl\Documents\internship record\视觉传感器\奥比中光Astra Pro\上位机软件\OpenNI2\Drivers, SDK version=v1.10.27-20250925-0549823cb
+[06/15 17:40:15.792651][debug][15368][DeviceManager.cpp:30] DeviceManager init ...
+[06/15 17:40:15.792673][info][15368][MfPal.cpp:105] createObPal: create WinPal!
+[06/15 17:40:15.792696][debug][15368][MfPal.cpp:110] WmfPal init ...
+[06/15 17:40:15.843838][debug][15368][MfPal.cpp:117] WmfPal created!
+[06/15 17:40:15.843885][debug][15368][DeviceManager.cpp:34] Enable USB Device Enumerator ...
+[06/15 17:40:15.863262][debug][15368][EnumeratorLibusb.cpp:324] queryDevicesInfo done!
+[06/15 17:40:15.863316][warning][15368][MfPal.cpp:265] Found a usb port without interface url! drop it!(device url=\\?\USB#VID_2BC5&PID_0403#6&2E1DEABC&0&2#{A5DCBF10-6530-11D2-901F-00C04FB951ED} interface index=0)
+[06/15 17:40:15.863358][debug][15368][UsbDeviceEnumerator.cpp:163] Current usb device port list:
+[06/15 17:40:15.863382][debug][15368][UsbDeviceEnumerator.cpp:166]  - \\?\USB#VID_2BC5&PID_0501&MI_00#7&9D6DE20&0&0000#{E5323777-F976-4F5B-9B55-B94699C46E44}\GLOBAL | Astra Pro HD Camera
+[06/15 17:40:15.863471][debug][15368][MfPal.cpp:219] Create WinEventDeviceWatcher!
+[06/15 17:40:15.863506][debug][15368][UsbDeviceEnumerator.cpp:78] No matched usb device found!
+[06/15 17:40:15.863533][info][15368][DeviceManager.cpp:15] Current found device(s): (0)
+[06/15 17:40:15.863550][debug][15368][DeviceManager.cpp:52] DeviceManager construct done!
+[06/15 17:40:15.863571][warning][15368][ObException.cpp:5] No device found, fail to create pipeline!
+[06/15 17:46:30.687689][debug][45780][Context.cpp:30] Context creating, work_dir=C:\Users\tianl\Documents\internship record\视觉传感器\奥比中光Astra Pro\上位机软件\OpenNI2\Drivers
+[06/15 17:46:30.687780][debug][45780][Context.cpp:49] Config file version=1.1
+[06/15 17:46:30.687809][debug][45780][FrameBufferManager.cpp:23] Max global frame buffer size updated! size=2048.000MB
+[06/15 17:46:30.687829][info][45780][Context.cpp:68] Context created with config: default config!
+[06/15 17:46:30.688261][info][45780][Context.cpp:73] Work directory=C:\Users\tianl\Documents\internship record\视觉传感器\奥比中光Astra Pro\上位机软件\OpenNI2\Drivers, SDK version=v1.10.27-20250925-0549823cb
+[06/15 17:46:30.688384][debug][45780][DeviceManager.cpp:30] DeviceManager init ...
+[06/15 17:46:30.688408][info][45780][MfPal.cpp:105] createObPal: create WinPal!
+[06/15 17:46:30.688467][debug][45780][MfPal.cpp:110] WmfPal init ...
+[06/15 17:46:30.755539][debug][45780][MfPal.cpp:117] WmfPal created!
+[06/15 17:46:30.755591][debug][45780][DeviceManager.cpp:34] Enable USB Device Enumerator ...
+[06/15 17:46:30.773574][debug][45780][EnumeratorLibusb.cpp:324] queryDevicesInfo done!
+[06/15 17:46:30.773617][warning][45780][MfPal.cpp:265] Found a usb port without interface url! drop it!(device url=\\?\USB#VID_2BC5&PID_0403#6&2E1DEABC&0&2#{A5DCBF10-6530-11D2-901F-00C04FB951ED} interface index=0)
+[06/15 17:46:30.773749][debug][45780][UsbDeviceEnumerator.cpp:163] Current usb device port list:
+[06/15 17:46:30.773777][debug][45780][UsbDeviceEnumerator.cpp:166]  - \\?\USB#VID_2BC5&PID_0501&MI_00#7&9D6DE20&0&0000#{E5323777-F976-4F5B-9B55-B94699C46E44}\GLOBAL | Astra Pro HD Camera
+[06/15 17:46:30.773881][debug][45780][MfPal.cpp:219] Create WinEventDeviceWatcher!
+[06/15 17:46:30.773925][debug][45780][UsbDeviceEnumerator.cpp:78] No matched usb device found!
+[06/15 17:46:30.773961][info][45780][DeviceManager.cpp:15] Current found device(s): (0)
+[06/15 17:46:30.774067][debug][45780][DeviceManager.cpp:52] DeviceManager construct done!
+[06/15 17:46:30.774163][warning][45780][ObException.cpp:5] No device found, fail to create pipeline!

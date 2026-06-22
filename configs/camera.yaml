@@ -1,0 +1,62 @@
+﻿# Orbbec Astra Plus Camera Configuration
+camera:
+  device_id: 0
+  rgb:
+    width: 1280
+    height: 720
+    fps: 30
+    format: "yuyv"
+  depth:
+    width: 1280
+    height: 720
+    fps: 30
+    format: "y16"
+  point_cloud:
+    enabled: true
+    max_points: 307200
+
+dual_camera:
+  enable: true
+  left:
+    device_id: 0
+  right:
+    device_id: 1
+  sync:
+    method: "software_timestamp"
+    tolerance_ms: 30
+
+# Intrinsics (Orbbec Astra Plus @ 640x480, typical values - fill actual from calibration)
+intrinsics:
+  calibrated: true
+  calibration_date: "2025"
+  resolution: "1280x720"
+  fx: 975.63
+  fy: 973.73
+  cx: 636.65
+  cy: 366.71
+  k1: 0.002018
+  k2: 0.452238
+  p1: 0.000661
+  p2: -0.000553
+  k3: -1.249321
+  reprojection_error_px: 0.1127
+  calibration_file: "configs/astra_pro_intrinsics.json"
+
+# Stereo extrinsics (filled by extrinsic calibration)
+extrinsics:
+  enabled: false
+  R: null
+  T: null
+  baseline_mm: null
+  reprojection_error: null
+  calibration_date: null
+  params_file: "configs/extrinsic_params.json"
+
+calibration_board:
+  type: "charuco"
+  squares_x: 7
+  squares_y: 5
+  square_length_mm: 40
+  marker_length_mm: 25
+  dictionary: "DICT_6X6_250"
+  resolution: "1280x720"

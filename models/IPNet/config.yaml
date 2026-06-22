@@ -1,0 +1,26 @@
+# IPNet Benchmark Config
+model:
+  name: "IPNet"
+  type: "depth"
+  repo: "https://github.com/shubham-goel/IPNet"
+  expected_input: "depth_map"  # Depth image or point cloud
+  input_size: [256, 256]       # H, W
+
+benchmark:
+  test_sequence: "data/rgb_depth_sequences/"
+  output_dir: "results/"
+  log_dir: "results/logs/"
+  warmup_frames: 10
+  benchmark_frames: 200
+
+metrics:
+  detect_rate: true
+  fps: true
+  latency_ms: true
+  stability: true
+  keypoints_21: true   # IPNet outputs 21 keypoints
+  keypoints_3d: true   # IPNet outputs 3D coordinates
+
+paths:
+  pretrained_weights: "models/IPNet/pretrained/ipnet_hand.pth"
+  config_file: "models/IPNet/configs/hand.yaml"

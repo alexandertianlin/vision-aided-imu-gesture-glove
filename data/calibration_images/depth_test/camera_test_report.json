@@ -1,0 +1,21 @@
+{
+  "camera": {
+    "rgb": {
+      "status": "pass",
+      "n_frames": 100,
+      "resolution": "640x480",
+      "fps": 30.3,
+      "avg_capture_ms": 33.27,
+      "mean_brightness": 162.8
+    },
+    "depth": {
+      "status": "unavailable",
+      "note": "Depth via UVC/OpenNI2 not available"
+    },
+    "charuco": {
+      "status": "info",
+      "note": "No board detected, show board to camera"
+    },
+    "overall": "PASS"
+  }
+}

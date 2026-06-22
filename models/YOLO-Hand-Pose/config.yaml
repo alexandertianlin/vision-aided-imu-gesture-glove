@@ -1,0 +1,19 @@
+model:
+  name: "YOLO-Hand-Pose"
+  type: "rgb"
+  framework: "ultralytics"
+  expected_input: "rgb_image"
+  input_size: [640, 640]
+benchmark:
+  test_sequence: "data/rgb_depth_sequences/"
+  output_dir: "results/"
+  log_dir: "results/logs/"
+  warmup_frames: 10
+  benchmark_frames: 200
+metrics:
+  detect_rate: true
+  fps: true
+  latency_ms: true
+  stability: true
+  keypoints_21: false
+  keypoints_3d: false

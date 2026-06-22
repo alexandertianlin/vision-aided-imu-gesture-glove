@@ -1,0 +1,51 @@
+# Unity generated files
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+
+# IDE files
+.vs/
+.vscode/
+.idea/
+*.csproj
+*.sln
+*.user
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Python generated
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Downloaded models and local calibration data
+python/hand_landmarker.task
+python/finger_calibration_db.json
+
+# Logs
+*.log
+
+# Results / data (large files not committed)
+results/
+data/**/*.png
+data/**/*.jpg
+data/**/*.raw
+data/**/*.npy
+outputs/
+
+# Config with local paths
+configs/*.json

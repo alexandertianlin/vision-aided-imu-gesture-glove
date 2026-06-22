@@ -1,0 +1,14 @@
+# Extrinsic Calibration Config
+calibration:
+  board: "ChArUco"
+  rows: 7
+  cols: 5
+  square_length_mm: 40
+  marker_length_mm: 25
+  dictionary: "DICT_6X6_250"
+  min_pairs: 3
+stereo:
+  flags: "CALIB_FIX_INTRINSIC"
+  criteria_eps: 1e-6
+output:
+  path: "configs/extrinsic_params.json"
