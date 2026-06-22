@@ -1,13 +1,31 @@
-# Python Vision Sender
+# Python Vision Pipeline
 
-`mediapipe_udp_sender.py` reads an iPhone/DroidCam video stream, detects a hand with MediaPipe, classifies per-finger open/fist states, and sends UDP correction packets to Unity.
+Two versions available:
 
-Default settings:
+## V1: iPhone DroidCam (mediapipe_udp_sender.py)
 
-- camera stream: `http://192.168.2.139:4747/video`
-- Unity IP: `127.0.0.1`
-- Unity UDP port: `5055`
+Original version using iPhone as camera via DroidCam RTSP stream.
+Same UDP port 5055, same calibration pipeline.
 
-Edit these constants at the top of `mediapipe_udp_sender.py` if your camera or Unity port changes.
+Edit `RTSP_URL` at the top of the file to match your DroidCam IP.
 
-The script creates `finger_calibration_db.json` locally after calibration. The example file in this repository is included only to show the expected data shape.
+## V2: Intel D435i (mediapipe_udp_sender_v2.py)
+
+New version using Intel RealSense D435i RGB camera.
+Same pipeline, same UDP format, same calibration.
+
+Camera auto-detects ID 0-4, configurable at top of file.
+
+## Usage
+
+```powershell
+.venv\Scripts\Activate
+python mediapipe_udp_sender_v2.py    # V2: D435i
+python mediapipe_udp_sender.py       # V1: iPhone DroidCam
+```
+
+## IMU Monitor
+
+```powershell
+python serial_imu_reader.py --port COM3 --baud 460800
+```
