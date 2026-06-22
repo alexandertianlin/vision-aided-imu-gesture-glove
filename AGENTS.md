@@ -54,7 +54,7 @@
 | V1 | Orbbec Astra Plus + MediaPipe + 手指标定 | 2026-06-15 | completed |
 | V1.1 | ChArUco 标定 + RGB-D 对齐 | 2026-06-05 | completed |
 | V2.0 | D435i + MediaPipe Hand 基础检测 | 2026-06-21 | completed |
-| V2.1 | Unity UDP 桥接 | 2026-06-21 | completed |
+| V2.1 | D435i + MediaPipe + UDP + IMU (当前版本) | 2026-06-22 | completed |
 | V2.2 | MediaPipe 直接驱骨（端口 5056） | 2026-06-21 | in_progress |
 | V2.3 | FingerSolver IK 管线集成（端口 5057） | 2026-06-21 | in_progress |
 | V3 | HAMER + IMU 深度融合 | TBD | pending |

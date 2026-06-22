@@ -9,7 +9,7 @@ import cv2
 import mediapipe as mp
 
 
-CAMERA_ID = 0        # D435i RGB camera ID
+CAMERA_ID = 1        # D435i RGB camera (auto-detected)        # D435i RGB camera ID
 CAMERA_WIDTH = 640
 CAMERA_HEIGHT = 480
 CAMERA_FPS = 30
@@ -354,7 +354,7 @@ def draw_runtime_overlay(frame, finger_states, finger_scores, orientation):
 def main():
     model_path = ensure_model()
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    cap = cv2.VideoCapture(CAMERA_ID, cv2.CAP_DSHOW)
+    cap = cv2.VideoCapture(CAMERA_ID, cv2.CAP_DSHOW)  # confirmed working on this machine
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, CAMERA_WIDTH)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, CAMERA_HEIGHT)
     cap.set(cv2.CAP_PROP_FPS, CAMERA_FPS)
