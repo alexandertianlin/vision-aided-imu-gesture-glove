@@ -170,14 +170,22 @@ public class VisionFingerCorrectionReceiver : MonoBehaviour
             bool noImu = sr == null || sr.ImuDataDict.Count == 0;
             if (noImu)
             {
-                var ff = GetFingers();
-                for (int fi = 0; fi < activeFingerCommands.Length; fi++)
+                for (int fi = 0; fi < activeFingerCommands.Length && fi < 5; fi++)
                 {
-                    if (!IsDriveCommand(activeFingerCommands[fi]) && fi < ff.Length && ff[fi] != null)
+                    if (!IsDriveCommand(activeFingerCommands[fi]))
                     {
-                        ff[fi].ForceVisionAngleAnchor(0, 0,
-                            handMotion.fingerBendAxis,
-                            handMotion.fingerSpreadAxis);
+                        FingerSolver fs = null;
+                        if (fi == 0) fs = handMotion.thumb;
+                        else if (fi == 1) fs = handMotion.index;
+                        else if (fi == 2) fs = handMotion.middle;
+                        else if (fi == 3) fs = handMotion.ring;
+                        else if (fi == 4) fs = handMotion.little;
+                        if (fs != null)
+                        {
+                            fs.ForceVisionAngleAnchor(0, 0,
+                                handMotion.fingerBendAxis,
+                                handMotion.fingerSpreadAxis);
+                        }
                     }
                 }
             }
