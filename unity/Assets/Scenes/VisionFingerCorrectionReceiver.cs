@@ -182,6 +182,7 @@ public class VisionFingerCorrectionReceiver : MonoBehaviour
                         else if (fi == 4) fs = handMotion.little;
                         if (fs != null)
                         {
+                            WriteDiagnostic("RELAX", "fi=" + fi + " reset to OPEN");
                             fs.ForceVisionAngleAnchor(0, 0,
                                 handMotion.fingerBendAxis,
                                 handMotion.fingerSpreadAxis);

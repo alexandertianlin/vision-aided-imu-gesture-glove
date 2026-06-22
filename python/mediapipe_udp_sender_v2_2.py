@@ -540,6 +540,9 @@ def main():
                         score = score_finger(ranges, calibration_db, name, value)
                         state, state_conf = classify_score(score)
                         confidence = min(hand_conf, state_conf)
+                        # CHAIN LOG: per-frame finger state
+                        if True:
+                            print("CHAIN " + name + ": score=" + str(round(score,3)) + " state=" + state + " orient=" + orientation + " pitch=" + str(round(pitch,1)))
                         finger_states[name] = state
                         finger_scores[name] = score
                         command_state = state

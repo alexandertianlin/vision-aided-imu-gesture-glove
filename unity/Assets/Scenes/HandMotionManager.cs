@@ -233,6 +233,7 @@ public class HandMotionManager : MonoBehaviour
                 var f = fingersCache[i];
                 float tp = fist ? (useFingerMaxPitchForFist ? f.MaxPitch : fallbackFistPitch) : openPitch;
                 float ty = fist ? fistYaw : openYaw;
+                Debug.Log("[CHAIN] ApplyVision NOIMU: finger=" + i + " pitch=" + tp + " yaw=" + ty);
                 f.ForceVisionAngleAnchor(tp, ty, fingerBendAxis, fingerSpreadAxis);
                 applied = true;
             }
