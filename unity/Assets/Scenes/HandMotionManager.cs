@@ -223,6 +223,22 @@ public class HandMotionManager : MonoBehaviour
         float blendAlpha = 1f,
         int fingerIndex = -1)
     {
+        // No IMU: pure vision mode, use ForceVisionAngleAnchor directly
+        if (receiver != null && receiver.ImuDataDict.Count == 0)
+        {
+            bool applied = false;
+            for (int i = 0; i < fingersCache.Length; i++)
+            {
+                if (fingerIndex >= 0 && i != fingerIndex) continue;
+                var f = fingersCache[i];
+                float tp = fist ? (useFingerMaxPitchForFist ? f.MaxPitch : fallbackFistPitch) : openPitch;
+                float ty = fist ? fistYaw : openYaw;
+                f.ForceVisionAngleAnchor(tp, ty, fingerBendAxis, fingerSpreadAxis);
+                applied = true;
+            }
+            return applied;
+        }
+
         if (!isCalibrated) return false;
         if (!receiver.ImuDataDict.TryGetValue(palmId, out Quaternion rawPalmQ)) return false;
 
