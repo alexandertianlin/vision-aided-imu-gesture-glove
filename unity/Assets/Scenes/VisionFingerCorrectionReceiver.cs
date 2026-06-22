@@ -163,6 +163,26 @@ public class VisionFingerCorrectionReceiver : MonoBehaviour
         }
 
         DriveActiveAnchor();
+        // Pure vision relax: reset inactive fingers to open when no IMU
+        if (handMotion != null)
+        {
+            var sr = GetComponent<SerialReceiver>();
+            bool noImu = sr == null || sr.ImuDataDict.Count == 0;
+            if (noImu)
+            {
+                var ff = GetFingers();
+                for (int fi = 0; fi < activeFingerCommands.Length; fi++)
+                {
+                    if (!IsDriveCommand(activeFingerCommands[fi]) && fi < ff.Length && ff[fi] != null)
+                    {
+                        ff[fi].ForceVisionAngleAnchor(0, 0,
+                            handMotion.fingerBendAxis,
+                            handMotion.fingerSpreadAxis);
+                    }
+                }
+            }
+        }
+
     }
 
     private void TryStartVisualTakeover(string json)
