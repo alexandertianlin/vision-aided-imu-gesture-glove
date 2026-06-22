@@ -122,7 +122,9 @@ public class VisionFingerCorrectionReceiver : MonoBehaviour
         }
 
         if (udpClient == null) StartReceiver();
-        if (handMotion == null || !handMotion.IsCalibrated) return;
+        bool _imuAvail = GetComponent<SerialReceiver>() != null && GetComponent<SerialReceiver>().ImuDataDict.Count > 0;
+        if (handMotion == null || (!handMotion.IsCalibrated && _imuAvail)) return;
+        if (!_imuAvail && !handMotion.IsCalibrated) { WriteDiagnostic("AUTO_VISION","bypass IMU check - no glove"); }
 
         List<string> packets = null;
         lock (packetLock)

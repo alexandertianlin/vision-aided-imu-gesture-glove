@@ -12,7 +12,7 @@ import mediapipe as mp
 
 CAMERA_ID = 1
 UNITY_IP = "127.0.0.1"
-UNITY_PORT = 5058
+UNITY_PORT = 5055
 
 MIN_HAND_CONFIDENCE = 0.70
 VIS_CONFIDENCE_THRESHOLD = 0.75
@@ -401,7 +401,24 @@ def main():
     calibration_db = load_calibration_db()
     calibration_started = time.monotonic()
     total_calibration_seconds = STAGE_SECONDS * len(FINGER_ORDER)
-    calibrated = False
+    # Auto-skip calibration if database has enough samples for all fingers
+    all_ready = True
+    for n in FINGER_ORDER:
+        if not database_ready(calibration_db, n):
+            all_ready = False
+            break
+    if all_ready and "--recal" not in sys.argv:
+        calibrated = True
+        info = "AUTO: Loaded " + str(DATABASE_LIMIT) + " samples/finger. Use --recal to recalibrate."
+        print(info)
+    else:
+        calibrated = False
+        if "--recal" in sys.argv:
+            print("RECAL: Forcing recalibration.")
+        else:
+            need = str(MIN_DATABASE_SAMPLES)
+            print("CALIBRATE: Need " + need + "+ samples/finger. Follow on-screen prompts.")
+
     
     # --skip-cal flag: use existing calibration database if available
     if "--skip-cal" in sys.argv:
