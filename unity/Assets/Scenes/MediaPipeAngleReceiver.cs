@@ -21,6 +21,7 @@ public class MediaPipeAngleReceiver : MonoBehaviour
     [Header("Connection")]
     public int listenPort = 5058;
     public bool enableAngleDriving = true;
+    public bool visionOnlyMode = false;  // Force pure vision (auto-fallback when IMU absent)
 
     [Header("Timeout")]
     [Tooltip("Seconds without a packet before IMU resumes full control.")]
@@ -59,7 +60,11 @@ public class MediaPipeAngleReceiver : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!enableAngleDriving || handMotion == null || !handMotion.IsCalibrated)
+        bool imuAvailable = GetComponent<SerialReceiver>() != null 
+                && GetComponent<SerialReceiver>().ImuDataDict.Count > 0;
+        bool useVisionOnly = visionOnlyMode || !imuAvailable;
+
+        if (!enableAngleDriving || handMotion == null || (!handMotion.IsCalibrated && !useVisionOnly))
             return;
 
         float now = Time.time;
@@ -67,7 +72,7 @@ public class MediaPipeAngleReceiver : MonoBehaviour
         for (int fi = 0; fi < 5; fi++)
         {
             if (!hasReceived[fi]) continue;
-            if (now - lastPacketTimes[fi] > angleTimeoutSeconds)
+            if (imuAvailable && now - lastPacketTimes[fi] > angleTimeoutSeconds)
             {
                 if (printLog && hasReceived[fi])
                     Debug.Log($"[AngleRecv] fi={fi} TIMEOUT - IMU resumes control");
@@ -82,16 +87,29 @@ public class MediaPipeAngleReceiver : MonoBehaviour
                 yaw = lastYaws[fi];
             }
 
-            // Apply via FingerSolver.ForceVisionAngleAnchor
+            // Apply via FingerSolver
             var fingers = GetFingers();
             if (fi < fingers.Length && fingers[fi] != null)
             {
-                float blend = 1f - Mathf.Exp(-moveSpeed * Time.deltaTime);
-                fingers[fi].MoveVisionAngleAnchorAndSyncImu(
-                    pitch, yaw, blend,
-                    handMotion.fingerBendAxis,
-                    handMotion.fingerSpreadAxis
-                );
+                if (!imuAvailable || visionOnlyMode)
+                {
+                    // Pure vision drive: no IMU required
+                    fingers[fi].ForceVisionAngleAnchor(
+                        pitch, yaw,
+                        handMotion.fingerBendAxis,
+                        handMotion.fingerSpreadAxis
+                    );
+                }
+                else
+                {
+                    // Fusion mode: IMU + vision blending
+                    float blend = 1f - Mathf.Exp(-moveSpeed * Time.deltaTime);
+                    fingers[fi].MoveVisionAngleAnchorAndSyncImu(
+                        pitch, yaw, blend,
+                        handMotion.fingerBendAxis,
+                        handMotion.fingerSpreadAxis
+                    );
+                }
             }
         }
     }

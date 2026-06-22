@@ -2,6 +2,7 @@ import json
 import math
 import os
 import socket
+import sys
 import time
 import urllib.request
 
@@ -401,6 +402,20 @@ def main():
     calibration_started = time.monotonic()
     total_calibration_seconds = STAGE_SECONDS * len(FINGER_ORDER)
     calibrated = False
+    
+    # --skip-cal flag: use existing calibration database if available
+    if "--skip-cal" in sys.argv:
+        all_ready = True
+        for n in FINGER_ORDER:
+            if not database_ready(calibration_db, n):
+                all_ready = False
+                break
+        if all_ready:
+            calibrated = True
+            print("SKIP: Using existing calibration database (--skip-cal).")
+            print("  Remove --skip-cal flag to recalibrate.")
+        else:
+            print("SKIP: Database incomplete for some fingers. Running calibration.")
 
     last_state = {name: "IDLE" for name in FINGER_ORDER}
     state_since_ms = {name: None for name in FINGER_ORDER}
