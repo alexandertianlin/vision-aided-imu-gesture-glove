@@ -49,3 +49,6 @@ outputs/
 
 # Config with local paths
 configs/*.json
+
+# Crash logs
+crash_logs/
